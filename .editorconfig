@@ -1,0 +1,23 @@
+# 告诉 IDE 这是根目录
+root = true
+
+[*.cs]
+# 1. 核心缩进设置
+indent_style = space
+indent_size = 4
+
+# 2. 强制大括号在行尾 (K&R 风格)
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_catch = false
+csharp_new_line_before_else = false
+csharp_new_line_before_finally = false
+
+# 3. 命名规范覆盖：允许方法和属性使用小驼峰 (Java 风格)
+dotnet_naming_rule.java_methods_rule.symbols = methods_and_properties
+dotnet_naming_rule.java_methods_rule.style = lower_camel_case_style
+dotnet_naming_rule.java_methods_rule.severity = none
+
+dotnet_naming_symbols.methods_and_properties.applicable_kinds = method, property
+dotnet_naming_symbols.methods_and_properties.applicable_accessibilities = *
+
+dotnet_naming_style.lower_camel_case_style.capitalization = camel_case
