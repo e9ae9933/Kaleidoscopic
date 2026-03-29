@@ -1,52 +1,94 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <GameDir Condition=" '$(GameDir)' == '' ">path\to\AliceInCradle_Data\Managed</GameDir>
+    <PropertyGroup>
+        <GameDir Condition=" '$(GameDir)' == '' ">path\to\AliceInCradle_Data\Managed</GameDir>
 
-    <TargetFramework>net46</TargetFramework>
-    <AssemblyName>Kaleidoscopic</AssemblyName>
-    <RootNamespace>Kaleidoscopic</RootNamespace>
-    <Version>0.1.0</Version>
+        <TargetFramework>net472</TargetFramework>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AssemblyName>Kaleidoscopic</AssemblyName>
+        <RootNamespace>Kaleidoscopic</RootNamespace>
+        <Version>0.1.0</Version>
 
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>latest</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>latest</LangVersion>
 
-    <NoWarn>$(NoWarn);CS0169;CS0649</NoWarn>
-  </PropertyGroup>
+        <NoWarn>$(NoWarn);CS0169;CS0649</NoWarn>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <RestoreAdditionalProjectSources>
-      https://api.nuget.org/v3/index.json;
-      https://nuget.bepinex.dev/v3/index.json;
-      https://nuget.samboy.dev/v3/index.json
-    </RestoreAdditionalProjectSources>
-  </PropertyGroup>
+    <PropertyGroup>
+        <RestoreAdditionalProjectSources>
+            https://api.nuget.org/v3/index.json;
+            https://nuget.bepinex.dev/v3/index.json;
+            https://nuget.samboy.dev/v3/index.json
+        </RestoreAdditionalProjectSources>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
-    <PackageReference Include="BepInEx.Core" Version="5.*"/>
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
-    <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>U:\BepInEx\plugins\Kaleidoscopic</OutputPath>
+        <DebugType>full</DebugType>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Publicize Include="Assembly-CSharp" />
-    <Publicize Include="unsafeAssem" />
-    <Publicize Include="ttr" />
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>U:\BepInEx\plugins\Kaleidoscopic</OutputPath>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp"><HintPath>$(GameDir)\Assembly-CSharp.dll</HintPath></Reference>
-    <Reference Include="unsafeAssem"><HintPath>$(GameDir)\unsafeAssem.dll</HintPath></Reference>
-    <Reference Include="ttr"><HintPath>$(GameDir)\ttr.dll</HintPath></Reference>
-    <Reference Include="better"><HintPath>$(GameDir)\better.dll</HintPath></Reference>
+    <ItemGroup>
+        <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
+        <PackageReference Include="BepInEx.Core" Version="5.*"/>
+        <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
+        <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
+    </ItemGroup>
 
-    <Reference Include="UnityEngine"><HintPath>$(GameDir)\UnityEngine.dll</HintPath></Reference>
-    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameDir)\UnityEngine.CoreModule.dll</HintPath></Reference>
-    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(GameDir)\UnityEngine.IMGUIModule.dll</HintPath></Reference>
-    <Reference Include="UnityEngine.Physics2DModule"><HintPath>$(GameDir)\UnityEngine.Physics2DModule.dll</HintPath></Reference>
-    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(GameDir)\UnityEngine.TextRenderingModule.dll</HintPath></Reference>
-  </ItemGroup>
+    <ItemGroup>
+        <Publicize Include="Assembly-CSharp"/>
+        <Publicize Include="unsafeAssem"/>
+        <Publicize Include="ttr"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(GameDir)\Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="netstandard">
+            <HintPath>$(GameDir)\netstandard.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="unsafeAssem">
+            <HintPath>$(GameDir)\unsafeAssem.dll</HintPath>
+            <Private>false</Private>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="ttr">
+            <HintPath>$(GameDir)\ttr.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="better">
+            <HintPath>$(GameDir)\better.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <Reference Include="UnityEngine">
+            <HintPath>$(GameDir)\UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(GameDir)\UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>$(GameDir)\UnityEngine.IMGUIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>$(GameDir)\UnityEngine.Physics2DModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>$(GameDir)\UnityEngine.TextRenderingModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
 
 </Project>
