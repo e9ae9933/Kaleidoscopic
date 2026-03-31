@@ -6,7 +6,7 @@ using nel;
 namespace Kaleidoscopic.modules;
 
 [Module("解锁转轮物品获取 99 上限")]
-public class ReelBoundUnlocker {
+public static class ReelBoundUnlocker {
     [HarmonyPatch(typeof(ReelExecuter), nameof(ReelExecuter.applyEffectToIK))]
     [HarmonyTranspiler]
     public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {

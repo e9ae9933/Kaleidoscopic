@@ -4,7 +4,7 @@ using XX;
 
 namespace Kaleidoscopic;
 
-public class GeneralPatches {
+public static class GeneralPatches {
     
     [HarmonyPatch(typeof(SceneTitleTemp), "fineTexts")]
     [HarmonyPostfix]

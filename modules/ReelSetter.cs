@@ -8,7 +8,7 @@ using nel;
 namespace Kaleidoscopic.modules;
 
 [Module("转轮自动转到最优选择")]
-public class ReelSetter {
+public static class ReelSetter {
     [HarmonyPatch(typeof(ReelExecuter), nameof(ReelExecuter.applyEffectToIK))]
     [HarmonyPrefix]
     public static void ApplyEffectToIK(ReelExecuter __instance, ReelExecuter Reel) {
