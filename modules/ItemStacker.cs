@@ -3,6 +3,7 @@ using nel;
 
 namespace Kaleidoscopic.modules;
 
+[Module("解锁物品堆叠上限")]
 public class ItemStacker {
     [HarmonyPatch(typeof(ItemStorage), "getItemStockable")]
     [HarmonyPostfix]

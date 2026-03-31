@@ -5,6 +5,7 @@ using nel;
 
 namespace Kaleidoscopic.modules;
 
+[Module("解锁危险度 160 限制")]
 public class DangerUnlocker {
     [HarmonyPatch(typeof(NightController), "getDangerMeterVal")]
     [HarmonyTranspiler]

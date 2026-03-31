@@ -3,6 +3,7 @@ using nel;
 
 namespace Kaleidoscopic.modules;
 
+[Module("工会任务点变为 5 倍")]
 public class GuildPointsBooster {
     [HarmonyPatch(typeof(GQCategInfo), "reward_gp")] // yes it is a shit-like method.
     [HarmonyPostfix]

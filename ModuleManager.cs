@@ -13,11 +13,14 @@ public static class ModuleManager {
             .Where(t => t.Namespace == "Kaleidoscopic.modules" && t.IsClass);
 
         foreach (Type type in moduleTypes) {
+            ModuleAttribute attribute = type.GetCustomAttribute<ModuleAttribute>();
+            if (attribute is null) continue;
+            string desc = attribute.description;
             ConfigEntry<bool> switchConfig = config.Bind(
                 "模块",
-                type.Name,
+                $"{desc}",
                 false,
-                $"Enable {type.Name} feature"
+                $"{type.FullName}"
             );
 
             Harmony moduleHarmony = new($"org.aliceincradle.kaleidoscopic.module.{type.Name.ToLower()}");

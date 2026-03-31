@@ -4,6 +4,7 @@ using XX;
 
 namespace Kaleidoscopic.modules;
 
+[Module("解锁出门高危险度")]
 public class LeavingDangerUnlocker {
     private static readonly int[] lvs = [
         0, 21, 41,

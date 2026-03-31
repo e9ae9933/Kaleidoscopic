@@ -18,6 +18,7 @@ public class KaleidoscopicPlugin : BaseUnityPlugin {
             LOGGER = this.Logger;
             HARMONY = new Harmony("org.aliceincradle.kaleidoscopic");
             ModuleManager.init(this.Config);
+            HARMONY.PatchAll(typeof(GeneralPatches));
         } catch (Exception ex) {
             this.Logger.LogError(ex.ToString());
             Application.Quit("Kaleidoscopic".GetHashCode());
