@@ -5,7 +5,6 @@ using XX;
 namespace Kaleidoscopic;
 
 public static class GeneralPatches {
-    
     [HarmonyPatch(typeof(SceneTitleTemp), "fineTexts")]
     [HarmonyPostfix]
     public static void Postfix(TextRenderer ___TxCp) {

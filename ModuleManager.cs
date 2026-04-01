@@ -19,7 +19,7 @@ public static class ModuleManager {
             ConfigEntry<bool> switchConfig = config.Bind(
                 "模块",
                 $"{desc}",
-                false,
+                true,
                 $"{type.FullName}"
             );
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using HarmonyLib;
 using nel;
 
@@ -13,9 +11,6 @@ public static class ReelSetter {
     [HarmonyPrefix]
     public static void ApplyEffectToIK(ReelExecuter __instance, ReelExecuter Reel) {
         try {
-            info(__instance, Reel);
-            info(Reel.Acontent as object[]);
-            info(__instance.Ui.AReel.ToArray() as object[]);
             // if we can add item...
             if (__instance.IKRow == null) return;
             int count0 = __instance.IKRow.count;
@@ -25,13 +20,12 @@ public static class ReelSetter {
             if (dp(__instance.Ui, count0, grade0, __instance.Ui.rotate_decide_id, ref id)) {
                 Reel.content_id_dec = id;
                 string target = Reel.Acontent[Reel.content_id_dec % Reel.Acontent.Length];
-                info("tried to use", target);
             }
         } catch (Exception e) {
             error(e);
         }
     }
-    static bool dp(UiReelManager ui, int c0, int g0, int from, ref int id) {
+    private static bool dp(UiReelManager ui, int c0, int g0, int from, ref int id) {
         if (ui == null) return false;
         if (from < 0) return false;
         ReelExecuter[] r0 = ui.AReel?.ToArray();
@@ -54,7 +48,7 @@ public static class ReelSetter {
                 int[] tk = new int[m];
                 for (int t = 0; t < m; t++) tk[t] = t;
                 Array.Sort(tk, (u, v) =>
-                    String.Compare(reels[i].Acontent[u], reels[i].Acontent[v], StringComparison.Ordinal)
+                    string.Compare(reels[i].Acontent[u], reels[i].Acontent[v], StringComparison.Ordinal)
                 );
                 foreach (int k in tk) {
                     int c = f[i, j], g = j;
@@ -81,7 +75,7 @@ public static class ReelSetter {
         id = chs[1, lg];
         return true;
     }
-    static void apply(string str, ref int c, ref int g) {
+    private static void apply(string str, ref int c, ref int g) {
         ReelExecuter.EFFECT type;
         if (!Enum.TryParse(str, false, out type)) return;
         switch (type) {
