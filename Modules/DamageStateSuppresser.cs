@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("受到轻微攻击时不打断动作")]
 public static class DamageStateSuppresser {

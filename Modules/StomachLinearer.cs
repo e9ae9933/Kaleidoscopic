@@ -2,9 +2,9 @@
 using nel;
 using XX;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
-[Module("解锁效果叠加")]
+[Module("解锁食物效果叠加")]
 public static class StomachLinearer {
     [HarmonyPrefix]
     [HarmonyPatch(typeof(Stomach), "addEffect", typeof(RCP.RPI_EFFECT), typeof(float), typeof(float))]

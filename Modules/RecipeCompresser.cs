@@ -2,7 +2,7 @@
 using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("降低食品饱腹度")]
 public static class RecipeCompresser {

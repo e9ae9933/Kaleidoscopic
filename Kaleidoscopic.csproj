@@ -58,7 +58,6 @@
         <Reference Include="unsafeAssem">
             <HintPath>$(GameDir)\unsafeAssem.dll</HintPath>
             <Private>false</Private>
-            <Private>false</Private>
         </Reference>
         <Reference Include="ttr">
             <HintPath>$(GameDir)\ttr.dll</HintPath>
@@ -66,6 +65,10 @@
         </Reference>
         <Reference Include="better">
             <HintPath>$(GameDir)\better.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Windows.Forms">
+            <HintPath>$(GameDir)\System.Windows.Forms.dll</HintPath>
             <Private>false</Private>
         </Reference>
 

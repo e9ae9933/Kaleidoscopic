@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("解锁物品堆叠上限")]
 public static class ItemStacker {

@@ -3,7 +3,7 @@ using m2d;
 using nel;
 using XX;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("回调旋风斩")]
 public static class WheelReverter {
@@ -28,7 +28,7 @@ public static class WheelReverter {
         //         X.IntC(X.NIL(1f, 0.4f, EqCane.stability, 2f) *
         //                X.Mx((float)((double)X.Mn(EqCane.mp_use_ratio, 1f) * (double)mkind.reduce_mp * 0.20000000298023224),
         //                    __instance.mp_hold * 0.5f)));
-        
+
         //	publishShotgunHit(Mg, HitItem, MathF.PI * -3f / 25f, replace_normal: true,
         //X.Mx(7, X.IntC(X.NI(1f, 0.2f, EqCane.stability) * X.Mx(X.Mn(EqCane.mp_use_ratio, 1f)
         //* (float)kindData.reduce_mp * 0.2f, mp_hold * 0.5f))));

@@ -2,7 +2,7 @@
 using nel;
 using XX;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("解锁出门高危险度")]
 public static class LeavingDangerUnlocker {

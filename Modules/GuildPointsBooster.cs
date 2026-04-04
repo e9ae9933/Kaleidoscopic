@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("工会任务点变为 5 倍")]
 public static class GuildPointsBooster {

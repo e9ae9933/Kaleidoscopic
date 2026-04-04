@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("随地打开仓库")]
 public static class EnderChest {

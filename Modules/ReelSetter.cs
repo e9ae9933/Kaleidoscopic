@@ -3,7 +3,7 @@ using System.Linq;
 using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("转轮自动转到最优选择")]
 public static class ReelSetter {

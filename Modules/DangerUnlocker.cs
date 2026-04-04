@@ -3,17 +3,17 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
-[Module("解锁转轮物品获取 99 上限")]
-public static class ReelBoundUnlocker {
-    [HarmonyPatch(typeof(ReelExecuter), nameof(ReelExecuter.applyEffectToIK))]
+[Module("解锁危险度 160 限制")]
+public static class DangerUnlocker {
+    [HarmonyPatch(typeof(NightController), "getDangerMeterVal")]
     [HarmonyTranspiler]
     public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
         foreach (CodeInstruction inst in instructions) {
-            if (inst.LoadsConstant(99)) {
+            if (inst.LoadsConstant(160)) {
                 inst.opcode = OpCodes.Ldc_I4;
-                inst.operand = 100000;
+                inst.operand = 16000;
             }
             yield return inst;
         }

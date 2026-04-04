@@ -2,7 +2,7 @@
 using m2d;
 using nel;
 
-namespace Kaleidoscopic.modules;
+namespace Kaleidoscopic.Modules;
 
 [Module("免疫着火状态")]
 public static class BurnRemover {

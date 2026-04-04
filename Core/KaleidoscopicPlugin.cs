@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows.Forms;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
+using Application = UnityEngine.Application;
 
 namespace Kaleidoscopic;
 
@@ -21,6 +22,8 @@ public class KaleidoscopicPlugin : BaseUnityPlugin {
             HARMONY.PatchAll(typeof(GeneralPatches));
         } catch (Exception ex) {
             this.Logger.LogError(ex.ToString());
+            string text = $"无法加载插件 万华镜/Kaleidoscopic\n{ex}";
+            MessageBox.Show(text, "Kaleidoscopic catastrophe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             Application.Quit("Kaleidoscopic".GetHashCode());
             return;
         }
