@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <GameDir Condition=" '$(GameDir)' == '' ">path\to\AliceInCradle_Data\Managed</GameDir>
+        <GameDir Condition=" '$(GameDir)' == '' ">path\to\AliceInCradle</GameDir>
 
         <TargetFramework>net472</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AssemblyName>Kaleidoscopic</AssemblyName>
         <RootNamespace>Kaleidoscopic</RootNamespace>
-        <Version>0.1.0</Version>
+        <Version>0.29.0</Version>
 
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
@@ -24,12 +24,12 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <OutputPath>U:\BepInEx\plugins\Kaleidoscopic</OutputPath>
+        <OutputPath>$(GameDir)\BepInEx\plugins\Kaleidoscopic</OutputPath>
         <DebugType>full</DebugType>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <OutputPath>U:\BepInEx\plugins\Kaleidoscopic</OutputPath>
+        <OutputPath>$(GameDir)\BepInEx\plugins\Kaleidoscopic</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -48,48 +48,48 @@
 
     <ItemGroup>
         <Reference Include="Assembly-CSharp">
-            <HintPath>$(GameDir)\Assembly-CSharp.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\Assembly-CSharp.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="netstandard">
-            <HintPath>$(GameDir)\netstandard.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\netstandard.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="unsafeAssem">
-            <HintPath>$(GameDir)\unsafeAssem.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\unsafeAssem.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="ttr">
-            <HintPath>$(GameDir)\ttr.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\ttr.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="better">
-            <HintPath>$(GameDir)\better.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\better.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="System.Windows.Forms">
-            <HintPath>$(GameDir)\System.Windows.Forms.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\System.Windows.Forms.dll</HintPath>
             <Private>false</Private>
         </Reference>
 
         <Reference Include="UnityEngine">
-            <HintPath>$(GameDir)\UnityEngine.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
-            <HintPath>$(GameDir)\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.IMGUIModule">
-            <HintPath>$(GameDir)\UnityEngine.IMGUIModule.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.Physics2DModule">
-            <HintPath>$(GameDir)\UnityEngine.Physics2DModule.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
             <Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.TextRenderingModule">
-            <HintPath>$(GameDir)\UnityEngine.TextRenderingModule.dll</HintPath>
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
             <Private>false</Private>
         </Reference>
     </ItemGroup>
