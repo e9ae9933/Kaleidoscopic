@@ -9,7 +9,7 @@ using HarmonyLib;
 namespace Kaleidoscopic;
 
 public static class ModuleManager {
-    private static void createForNamespace(ConfigFile config, string ns, string nsdesc) {
+    private static void createForNamespace(ConfigFile config, string ns, string nsdesc, bool defaultValue) {
         IEnumerable<Type> moduleTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.Namespace == ns && t.IsClass);
 
@@ -17,10 +17,11 @@ public static class ModuleManager {
             ModuleAttribute attribute = type.GetCustomAttribute<ModuleAttribute>();
             if (attribute is null) continue;
             string desc = attribute.description;
+            debug("found module " + type.Name + " on namespace " + ns);
             ConfigEntry<bool> switchConfig = config.Bind(
                 $"{nsdesc}",
                 $"{desc}",
-                true,
+                defaultValue,
                 $"{type.FullName}"
             );
 
@@ -48,9 +49,12 @@ public static class ModuleManager {
                     disable();
                 }
             };
-        }}
-    
+        }
+    }
+
     public static void init(ConfigFile config) {
-        createForNamespace(config,"Kaleidoscopic.Modules","实用功能");
+        createForNamespace(config, "Kaleidoscopic.Modules", "实用功能", true);
+        createForNamespace(config, "Kaleidoscopic.Hacks", "神秘外挂", false);
+        createForNamespace(config, "Kaleidoscopic.Syncs", "联机", true);
     }
 }

@@ -1,8 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <GameDir Condition=" '$(GameDir)' == '' ">path\to\AliceInCradle</GameDir>
-
+        <!--
+            Write these to Kaleidoscopic.csproj.user.
+            
+            <?xml version="1.0" encoding="utf-8"?>
+            <Project>
+                <PropertyGroup>
+                    <GameDir>path\to\AliceInCradle</GameDir>
+                </PropertyGroup>
+            </Project>
+            
+            Where $(GameDir)\AliceInCradle.exe is present.
+        -->
         <TargetFramework>net472</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AssemblyName>Kaleidoscopic</AssemblyName>
@@ -11,6 +21,9 @@
 
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
+        <OutputPath>$(GameDir)\BepInEx\plugins\Kaleidoscopic</OutputPath>
+        <PathMap>$(MSBuildProjectDirectory)=/Kaleidoscopic</PathMap>
+        <DebugType>full</DebugType>
 
         <NoWarn>$(NoWarn);CS0169;CS0649</NoWarn>
     </PropertyGroup>
@@ -22,22 +35,13 @@
             https://nuget.samboy.dev/v3/index.json
         </RestoreAdditionalProjectSources>
     </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <OutputPath>$(GameDir)\BepInEx\plugins\Kaleidoscopic</OutputPath>
-        <DebugType>full</DebugType>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <OutputPath>$(GameDir)\BepInEx\plugins\Kaleidoscopic</OutputPath>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.*"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*"/>
         <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all"/>
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
     <ItemGroup>
@@ -67,6 +71,10 @@
             <HintPath>$(GameDir)\AliceInCradle_Data\Managed\better.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="pixelliner">
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\pixelliner.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
         <Reference Include="System.Windows.Forms">
             <HintPath>$(GameDir)\AliceInCradle_Data\Managed\System.Windows.Forms.dll</HintPath>
             <Private>false</Private>
@@ -94,4 +102,7 @@
         </Reference>
     </ItemGroup>
 
+<!--    <ItemGroup>-->
+<!--      <EmbeddedResource Include="Resources.resx" />-->
+<!--    </ItemGroup>-->
 </Project>
