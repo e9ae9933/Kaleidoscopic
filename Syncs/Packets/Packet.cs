@@ -36,6 +36,12 @@ public class PlayerInfo {
     public string poseTitle;
     public string characterTitle;
     public string caneName;
+    public float hp, hpmax;
+    public float mp, mpmax;
+    public int curMgKindInt;
+    public int aimInt;
+    public float curMgReduceMp;
+    public float skillMpHold;
 }
 
 /*

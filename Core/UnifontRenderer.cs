@@ -19,7 +19,7 @@ public class UnifontRenderer {
 
     public static void init() {
         glyphChara = new PxlCharacter("unifont" + new Random().Next() + new Random().NextDouble());
-        glyphChara.loadASync(Resources.unifont128_pxls);
+        glyphChara.loadASync(Resources.unifont65535_pxls);
         string str = UTF8Encoding.UTF8.GetString(Resources.unifont_16_0_04);
         foreach (string line in str.Split('\n')) {
             string t = line.Trim();
@@ -39,7 +39,8 @@ public class UnifontRenderer {
         if (!glyphChara.isLoadCompleted()) draw0(md, s, x, y, scaleX, scaleY, flipY);
         else draw1(md, s, x, y, scaleX, scaleY, flipY);
     }
-    public static void drawCenter(MeshDrawer md, string s, float x, float y, float scaleX, float scaleY, bool flipY = false) {
+
+    public static float getLengthX(string s, float scale = 1) {
         float sz = -1;
         foreach (char c in s) {
             int target = c;
@@ -47,20 +48,24 @@ public class UnifontRenderer {
             if (target >= 0 && target < glyphChara.getPose(0).getSequence(0).countFrames())
                 pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(target);
             else pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(0);
-            sz += (pxlFrame.name == "wide" ? 16 + 1 : 8 + 1) * scaleX;
+            sz += (pxlFrame.name == "wide" ? 16 + 1 : 8 + 1);
         }
+        return Mathf.Max(0, sz * scale);
+    }
+    public static void drawCenter(MeshDrawer md, string s, float x, float y, float scaleX, float scaleY, bool flipY = false) {
+        float sz = getLengthX(s, scaleX);
         x -= sz / 2;
         draw1(md, s, x, y, scaleX, scaleY, flipY);
     }
     public static void draw1(MeshDrawer md, string s, float x, float y, float scaleX, float scaleY, bool flipY) {
-        // md.initForImg(pxlFrame.getImageTexture());
         foreach (char c in s) {
             int target = c;
             PxlFrame pxlFrame;
             if (target >= 0 && target < glyphChara.getPose(0).getSequence(0).countFrames())
                 pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(target);
             else pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(0);
-            md.RotaPF(x, y, scaleX, scaleY, 0, pxlFrame);
+            float w = (pxlFrame.name == "wide" ? 16 : 8) * scaleX;
+            md.RotaPF(x + w/2, y, scaleX, scaleY, 0, pxlFrame);
             x += (pxlFrame.name == "wide" ? 16 + 1 : 8 + 1) * scaleX;
         }
     }
@@ -75,7 +80,6 @@ public class UnifontRenderer {
                     Console.WriteLine("failed on codepoint " + target);
                     continue;
                 }
-
                 for (int i = 0; i < 16; i++)
                 for (int j = 0; j < glyph.width; j++)
                     if (glyph.data[i, j])
