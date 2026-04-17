@@ -101,8 +101,4 @@
             <Private>false</Private>
         </Reference>
     </ItemGroup>
-
-<!--    <ItemGroup>-->
-<!--      <EmbeddedResource Include="Resources.resx" />-->
-<!--    </ItemGroup>-->
 </Project>

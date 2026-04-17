@@ -53,7 +53,7 @@ public static class ModuleManager {
     }
 
     public static void init(ConfigFile config) {
-        createForNamespace(config, "Kaleidoscopic.Modules", "实用功能", true);
+        createForNamespace(config, "Kaleidoscopic.Modules", "实用功能", false);
         createForNamespace(config, "Kaleidoscopic.Hacks", "神秘外挂", false);
         createForNamespace(config, "Kaleidoscopic.Syncs", "联机", true);
     }

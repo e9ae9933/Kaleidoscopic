@@ -10,7 +10,7 @@ using XX;
 
 namespace Kaleidoscopic.Syncs;
 
-[Module("testpatches2")]
+[Module("联机核心模块")]
 public static class MultiHandler {
     public static volatile PlayerInfo[] otherPlayers = [];
     [HarmonyPrefix]
