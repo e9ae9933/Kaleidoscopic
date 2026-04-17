@@ -45,7 +45,6 @@ public static class MultiHandler {
         string caneKey = pr?.Skill?.getCurrentCaneEquip().cane_key;
         MGKIND kind = pr?.getCurMagic()?.kind ?? 0;
         float curMgTime = pr?.Skill?.magic_t ?? Single.NaN;
-        info("skill reduce ", pr.Skill.getCurMagic()?.reduce_mp, pr.Skill.mp_hold);
         return new() {
             playerName = GeneralConfigs.multiName.Value,
             ax = pr.Anm.mv_anmx, ay = pr.Anm.mv_anmy,
