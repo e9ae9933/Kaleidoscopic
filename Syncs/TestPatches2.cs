@@ -132,12 +132,20 @@ public static class MultiHandler {
         screenY += 91;
         mdGraphics.Col = C32.MulA(0xFF000000U, alpha);
         mdGraphics.BoxBL(screenX + -half_w - 1f, screenY + -2f, 3f + half_w * 2f, 4f, 0f, false);
-        mdGraphics.Col = C32.MulA(0xFFFF7FDCU, alpha);
-        int num = X.IntC(half_w * (float)op.hp / op.hpmax);
-        mdGraphics.Line(screenX + (float)(-(float)num), screenY + 0f, screenX + 0f, screenY + 0f, 2f, false, 0f, 0f);
-        mdGraphics.Col = C32.MulA(0xFF4BEED3U, alpha);
-        int num2 = X.IntC(half_w * (float)op.mp / op.mpmax);
-        mdGraphics.Line(screenX + 1f, screenY + 0f, screenX + (float)(1 + num2), screenY + 0f, 2f, false, 0f, 0f);
+
+        float now;
+        now = op.hp / op.hpmax;
+        if (!Single.IsInfinity(now) && !Single.IsNaN(now)) {
+            int num = X.IntC(half_w * now);
+            mdGraphics.Col = C32.MulA(0xFFFF7FDCU, alpha);
+            mdGraphics.Line(screenX + (float)(-(float)num), screenY + 0f, screenX + 0f, screenY + 0f, 2f, false, 0f, 0f);
+        }
+        now = op.mp / op.mpmax;
+        if (!Single.IsInfinity(now) && !Single.IsNaN(now)) {
+            int num2 = X.IntC(half_w * (float)op.mp / op.mpmax);
+            mdGraphics.Col = C32.MulA(0xFF4BEED3U, alpha);
+            mdGraphics.Line(screenX + 1f, screenY + 0f, screenX + (float)(1 + num2), screenY + 0f, 2f, false, 0f, 0f);
+        }
         BLIT.RenderToGLImmediate001(mdGraphics, setpass: true);
     }
     public static void render2(ProjectionContainer JCon, PlayerInfo op, bool self = false) {
