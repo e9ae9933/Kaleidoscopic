@@ -197,6 +197,10 @@ public static class MultiHandler {
             toScreen(ref screenX, ref screenY);
 
             CaneManager.CaneItem currentCane = CaneManager.Get(op.caneName) ?? CaneManager.DefaultCane;
+            if (!currentCane.pxl_loaded) {
+                // is this right>
+                currentCane.preparePxl();
+            }
             // 拦截：如果是法杖图层，且我们确实有装备法杖
             if (isrod && currentCane != null) {
                 // info("found rod so setting");
