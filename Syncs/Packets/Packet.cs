@@ -44,12 +44,34 @@ public class PlayerInfo {
     public float skillMpHold;
 }
 
+public class EnemyInfo {
+    public int frameIndex;
+    public int sequenceAim;
+    public string poseTitle;
+    public string characterTitle;
+    public float x, y;
+    public float ax, ay;
+    public float vx, vy;
+    public float scaleX, scaleY;
+    public float rotationR;
+    public string name;
+    public string key;
+    public float hp, hpmax;
+    public float mp, mpmax;
+    public int aimInt;
+}
+
 /*
  * 客户端玩家每次更新都向服务端发送这玩意。
  */
 [Serializable]
 public class ClientBoundPlayerSyncPacket : ClientBoundPacket {
     public PlayerInfo info;
+}
+
+[Serializable]
+public class ClientBoundEnemySyncPacket : ClientBoundPacket {
+    public EnemyInfo[] enemyInfos;
 }
 
 /*
@@ -62,5 +84,13 @@ public class ServerBoundOtherPlayersSyncPacket : ServerBoundPacket {
     public PlayerInfo[] otherPlayers;
     public override void Process() {
         MultiHandler.otherPlayers = otherPlayers;
+    }
+}
+
+[Serializable]
+public class ServerBoundOtherEnemiesSyncPacket : ServerBoundPacket {
+    public EnemyInfo[] otherEnemies;
+    public override void Process() {
+        SyncPatcherEnemies.enemyInfos = otherEnemies;
     }
 }
