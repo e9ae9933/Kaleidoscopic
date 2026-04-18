@@ -1,5 +1,21 @@
 ﻿## 新一代神秘模组
 
+Recently, some people have accused my code of plagiarizing other people's closed-source code and claiming that I misused AI. This is pure rumor.
+
+近期，有人指控我的代码抄袭了他人的闭源代码，并认为我不当使用了 AI。这是纯纯的谣言。
+
+As proof, the AI usage report is at the bottom.
+
+作为自证，AI 使用报告在底部。
+
+In addition, I made a video to refute these rumors.
+
+此外，我制作了视频来驳斥这些谣言。
+
+[【【AIC多人联机】针对模组抄袭谣言的回应，以及满满的干货】](https://www.bilibili.com/video/BV1ZCd5ByEoh/?share_source=copy_web&vd_source=9e9a81c54a2e2739e919ab32cad87455)
+
+---
+
 https://github.com/e9ae9933/Kaleidoscopic
 
 这是客户端模组。
@@ -105,3 +121,24 @@ pause
 ### 第三步：加入游戏
 
 按F1（有的电脑是Fn+F1），输入服务器地址即可。你可能需要重新打开多人联机开关以应用更改。
+
+
+---
+
+## AI 使用报告
+
+本项目的后端 Java 语言采用了 LLM 大语言模型 Gemini 辅助开发。
+
+我们使用 AI 生成了服务端的代码，因为这玩意真没啥含金量。
+
+我们的客户端 C# 部分**仅**使用 AI 写网络通讯部分，以及**不影响核心功能地**修改已有手写代码。
+
+所有的 AI 代码均经过人工审查。
+
+The backend Java code for this project was developed using the LLM (Large Language Model) Gemini.
+
+We used AI to generate the server-side code because it's not particularly valuable.
+
+Our client-side C# code **only** uses AI to write the network communication parts, and **modifies** existing hand-written code **without affecting core functionality**.
+
+All AI-generated code has been manually reviewed.
