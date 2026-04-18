@@ -1,16 +1,20 @@
 ﻿## 新一代神秘模组
 
-Recently, some people have accused my code of plagiarizing other people's closed-source code and claiming that I misused AI. This is pure rumor.
-
 近期，有人指控我的代码抄袭了他人的闭源代码，并认为我不当使用了 AI。这是纯纯的谣言。
 
-As proof, the AI usage report is at the bottom.
+我们的代码是完全公开的，如果你认为我的代码涉及抄袭，请**拿出证据**，而不是**空口无凭地造谣**。
 
 作为自证，AI 使用报告在底部。
 
-In addition, I made a video to refute these rumors.
+Recently, some people have accused my code of plagiarizing other people's closed-source code and claiming that I misused AI. This is pure rumor.
+
+As proof, the AI usage report is at the bottom.
+
+Our code is completely open source. If you believe my code involves plagiarism, please **provide evidence** instead of **making baseless accusations**.
 
 此外，我制作了视频来驳斥这些谣言。
+
+In addition, I made a video to refute these rumors.
 
 [【【AIC多人联机】针对模组抄袭谣言的回应，以及满满的干货】](https://www.bilibili.com/video/BV1ZCd5ByEoh/?share_source=copy_web&vd_source=9e9a81c54a2e2739e919ab32cad87455)
 
@@ -135,6 +139,8 @@ pause
 
 所有的 AI 代码均经过人工审查。
 
+部分文档使用 AI 生成，采用谷歌翻译进行翻译。
+
 The backend Java code for this project was developed using the LLM (Large Language Model) Gemini.
 
 We used AI to generate the server-side code because it's not particularly valuable.
@@ -142,3 +148,42 @@ We used AI to generate the server-side code because it's not particularly valuab
 Our client-side C# code **only** uses AI to write the network communication parts, and **modifies** existing hand-written code **without affecting core functionality**.
 
 All AI-generated code has been manually reviewed.
+
+Some documents were generated using AI and translated using Google Translate.
+
+---
+
+## 核心参考项目一览 A list of core reference items
+
+我们的代码大量复制了 2023-2026 我写的原有的代码，许多代码都是由我在未使用 AI 的情况下进行的。
+
+Our code largely replicates the original code I wrote between 2023 and 2026, much of which I did without using AI.
+
+### [BobOnGradle (2023)](https://github.com/e9ae9933/BobOnGradle)
+
+提供渲染代码。
+
+Provide rendering code.
+
+### [AicUtils (2023, 2026 on github)](https://github.com/e9ae9933/AicUtils)
+
+提供资源文件替换和重定向。
+
+Provides resource file replacement and redirection.
+
+### [GenshinInCradle (2023)](https://github.com/e9ae9933/GenshinInCradle)
+
+提供文本渲染逻辑。
+
+Provides text rendering logic.
+
+### [pixelliner4j (2023, 2026 rewrote)](https://github.com/e9ae9933/pixelliner4j)
+
+重写自 `NyaruruTale (java awt), NyaruruTale-PixelPreviewerBranch (Open GL 3.3, LWJGL)`
+
+提供 PixelLiner 相关 Java 库文件。
+
+Rewritten from `NyaruruTale (java awt), NyaruruTale-PixelPreviewerBranch (Open GL 3.3, LWJGL)`
+
+Provides Java library files related to PixelLiner.
+
