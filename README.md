@@ -12,6 +12,10 @@ As proof, the AI usage report is at the bottom.
 
 Our code is completely open source. If you believe my code involves plagiarism, please **provide evidence** instead of **making baseless accusations**.
 
+关于 Alon 的另一个联机项目，出于个人和 AIC 代码打交道 3 年的经验，我认为他的架构难以维序。因此，我们重起炉灶做了另一版联机代码。
+
+Regarding Alon's other online project, based on my three years of experience working with AIC code, I felt his architecture was unsustainable. Therefore, we started from scratch and created another version of the online code.
+
 此外，我制作了视频来驳斥这些谣言。
 
 In addition, I made a video to refute these rumors.
