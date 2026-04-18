@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using HarmonyLib;
+using Kaleidoscopic.Core;
 using PixelLiner;
 using UnityEngine;
 using XX;
@@ -19,7 +20,7 @@ public class UnifontRenderer {
 
     public static void init() {
         glyphChara = new PxlCharacter("unifont" + new Random().Next() + new Random().NextDouble());
-        glyphChara.loadASync(Resources.unifont65535_pxls);
+        glyphChara.loadASync(GeneralConfigs.coreUsePlane0.Value ? Resources.unifont65535_pxls : Resources.unifont128_pxls);
         string str = UTF8Encoding.UTF8.GetString(Resources.unifont_16_0_04);
         foreach (string line in str.Split('\n')) {
             string t = line.Trim();
@@ -65,7 +66,7 @@ public class UnifontRenderer {
                 pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(target);
             else pxlFrame = glyphChara.getPose(0).getSequence(0).getFrame(0);
             float w = (pxlFrame.name == "wide" ? 16 : 8) * scaleX;
-            md.RotaPF(x + w/2, y, scaleX, scaleY, 0, pxlFrame);
+            md.RotaPF(x + w / 2, y, scaleX, scaleY, 0, pxlFrame);
             x += (pxlFrame.name == "wide" ? 16 + 1 : 8 + 1) * scaleX;
         }
     }

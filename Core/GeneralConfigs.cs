@@ -7,10 +7,12 @@ public static class GeneralConfigs {
     public static ConfigEntry<string> multiServer;
     public static ConfigEntry<string> multiName;
     public static ConfigEntry<bool> multiRetry;
+    public static ConfigEntry<bool> coreUsePlane0;
     public static void bind(ConfigFile config) {
         multiEnabled = config.Bind("多人联机", "启用多人联机", true);
         multiServer = config.Bind("多人联机", "服务器地址", "sync.aliceincradle.org:25560");
         multiRetry = config.Bind("多人联机", "断线重连", true);
         multiName = config.Bind("多人联机", "多人名称", $"Player{randInt(0, 99999):d5}");
+        coreUsePlane0 = config.Bind("通用", "使用完整码表", true, "如果你的显存不足2G可能需要关闭这个。重启生效");
     }
 }
