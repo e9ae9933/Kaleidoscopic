@@ -1,12 +1,13 @@
 ﻿global using static Kaleidoscopic.StrictMath;
 using System;
+using System.Diagnostics;
 using m2d;
 using nel;
 
 namespace Kaleidoscopic;
 
 public class StrictMath {
-    public static readonly Random random = new(998244353);
+    public static readonly Random random = new((int)Stopwatch.GetTimestamp());
 
     public static int randInt(int leftInclusive, int rightExclusive) {
         return random.Next(leftInclusive, rightExclusive);

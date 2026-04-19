@@ -72,24 +72,54 @@ public static class Frontend {
             Stop();
             return; // 直接中止发送
         }
-
         if (!IsConnected) return;
 
+        // 1. 一次性把当前队列里的包全部捞出来
+        List<ClientBoundPacket> pendingPackets = new List<ClientBoundPacket>();
         while (Dispatcher.TryGetPacketToSend(out ClientBoundPacket packet)) {
-            try {
-                string json = JsonConvert.SerializeObject(packet);
-                byte[] bytes = Encoding.UTF8.GetBytes(json);
-                await _ws.SendAsync(
-                    new ArraySegment<byte>(bytes),
-                    WebSocketMessageType.Text,
-                    true,
-                    _cts.Token
-                );
-            } catch (Exception e) {
-                error($"发送错误: {e.Message}");
-                HandleDisconnect(); 
-                break; 
+            pendingPackets.Add(packet);
+        }
+
+        if (pendingPackets.Count == 0) return; // 没事干就不发空包
+
+        try {
+            // 2. 始终使用保护模式发送 (由于你的需求是“第一个包自动切换”，客户端上来就可以直接用压缩包)
+        
+            // 2.1 序列化合包内容 (一个 JSON 数组)
+            string rawJson = JsonConvert.SerializeObject(pendingPackets);
+
+            // 2.2 GZIP 压缩
+            byte[] compressedBytes;
+            using (var ms = new System.IO.MemoryStream()) {
+                using (var gzip = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Compress, true)) {
+                    byte[] rawBytes = Encoding.UTF8.GetBytes(rawJson);
+                    gzip.Write(rawBytes, 0, rawBytes.Length);
+                }
+                compressedBytes = ms.ToArray();
             }
+
+            // 2.3 Base64 编码
+            string base64Payload = Convert.ToBase64String(compressedBytes);
+
+            // 2.4 构建专用的升级保护包
+            var protectedPacket = new ClientBoundProtectedModePacket {
+                payload = base64Payload
+            };
+
+            // 3. 最终序列化发送这一个包
+            string finalJson = JsonConvert.SerializeObject(protectedPacket);
+            byte[] bytesToSend = Encoding.UTF8.GetBytes(finalJson);
+        
+            await _ws.SendAsync(
+                new ArraySegment<byte>(bytesToSend),
+                WebSocketMessageType.Text,
+                true,
+                _cts.Token
+            );
+        
+        } catch (Exception e) {
+            error($"发送/压缩错误: {e.Message}");
+            HandleDisconnect(); 
         }
     }
 
@@ -227,7 +257,11 @@ public static class Dispatcher {
         while (sq.TryDequeue(out ServerBoundPacket packet)) {
             // debug("there are "+sq.Count+" packets still in sq");
             // debug("there are "+cq.Count+" packets still in cq");
-            packet.Process();
+            try {
+                packet.Process();
+            } catch (Exception e) {
+                error("failed to handle packet", e);
+            }
         }
     }
 }

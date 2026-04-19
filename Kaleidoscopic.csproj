@@ -84,6 +84,14 @@
             <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.dll</HintPath>
             <Private>false</Private>
         </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+            <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>$(GameDir)\AliceInCradle_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>false</Private>

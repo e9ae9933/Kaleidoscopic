@@ -164,6 +164,7 @@ public static class MultiHandler {
     }
     public static void render1(ProjectionContainer JCon, PlayerInfo op) {
         PxlCharacter chara = PxlsLoader.getPxlCharacter(op.characterTitle);
+        if ((chara?.isLoadCompleted() ?? false) == false) chara = null;
         PxlPose pose = chara?.getPoseByName(op.poseTitle);
         PxlSequence seq = pose?.getSequence(op.sequenceAim);
         PxlFrame frame = seq?.getFrame(op.frameIndex);

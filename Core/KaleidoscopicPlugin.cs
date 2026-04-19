@@ -5,11 +5,14 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Kaleidoscopic.Core;
 using Kaleidoscopic.Syncs;
+using m2d;
+using nel;
+using UnityEngine;
 using Application = UnityEngine.Application;
 
 namespace Kaleidoscopic;
 
-[BepInPlugin("org.aliceincradle.kaleidoscopic", "Kaleidoscopic", "0.1.0")]
+[BepInPlugin("org.aliceincradle.kaleidoscopic", "Kaleidoscopic", "0.2.0")]
 public class KaleidoscopicPlugin : BaseUnityPlugin {
     internal static KaleidoscopicPlugin INSTANCE;
     internal static ManualLogSource LOGGER;
