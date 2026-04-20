@@ -10,6 +10,7 @@ using Kaleidoscopic.Core;
 using Kaleidoscopic.Syncs.Packets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using XX;
 
 namespace Kaleidoscopic.Syncs;
 
@@ -109,7 +110,8 @@ public static class Frontend {
             // 3. 最终序列化发送这一个包
             string finalJson = JsonConvert.SerializeObject(protectedPacket);
             byte[] bytesToSend = Encoding.UTF8.GetBytes(finalJson);
-        
+            // debug("payload with size "+bytesToSend.Length+" at time "+DateTime.Now);
+            // debug(finalJson);
             await _ws.SendAsync(
                 new ArraySegment<byte>(bytesToSend),
                 WebSocketMessageType.Text,
@@ -255,13 +257,24 @@ public static class Dispatcher {
 
     public static void handleAll() {
         while (sq.TryDequeue(out ServerBoundPacket packet)) {
-            // debug("there are "+sq.Count+" packets still in sq");
-            // debug("there are "+cq.Count+" packets still in cq");
             try {
                 packet.Process();
             } catch (Exception e) {
                 error("failed to handle packet", e);
             }
         }
+    }
+}
+
+public static class StateHolder {
+    public static long whoami => ClientBoundPacket.whoami;
+    
+    public static Dictionary<string, long> ticks = new();
+    public static bool skip(string key) {
+        if (!ticks.ContainsKey(key)) {
+            ticks[key] = 0;
+        }
+        ticks[key]++;
+        return IN.totalframe % 1 != 0;
     }
 }

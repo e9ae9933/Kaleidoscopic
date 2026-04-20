@@ -17,6 +17,7 @@ public static class MultiHandler {
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PR), nameof(PR.runUi))]
     public static void runUi(PR __instance) {
+        if (StateHolder.skip("multihandler")) return;
         PR pr = __instance;
         PxlFrame frame = pr?.getAnimator()?.Anm?.getCurrentDrawnFrame();
         if (frame is not null) {
@@ -68,6 +69,7 @@ public static class MultiHandler {
     [HarmonyPostfix]
     public static void renderWholeMover(ref ProjectionContainer JCon, ref Camera Cam, ref int draw_id,
         ref List<M2RenderTicket>[] ___AADob) {
+        // if (StateHolder.skip("moverhandler")) return;
         if (Cam.name != "M2D Camera -mover") return;
         if (otherPlayers == null) return;
         if (Frontend.IsConnected) {

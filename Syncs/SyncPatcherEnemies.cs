@@ -55,10 +55,6 @@ public class SyncPatcherEnemies {
                 y[i] = points[i].y;
             }
         }
-        EnemyBoundingBox bbox = new() {
-            width = en.sizex, height = en.sizey, // well actually not needed?
-            x = x, y = y
-        };
         return new() {
             name = en.name, key = en.key,
             ax = anm.Anm.mv_anmx, ay = anm.Anm.mv_anmy,
@@ -73,7 +69,6 @@ public class SyncPatcherEnemies {
             scaleX = anm.Anm.scaleX, scaleY = anm.Anm.scaleY,
             rotationR = anm.rotationR,
             aimInt = (int)en.aim,
-            bbox = bbox,
         };
     }
     [HarmonyPatch(typeof(M2MovRenderContainer), "RenderWholeMover")]

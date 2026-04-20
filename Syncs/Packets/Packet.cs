@@ -17,7 +17,7 @@ public abstract class Packet {
 public abstract class ClientBoundPacket : Packet {
     public long token => whoami;
 
-    private static readonly long whoami = random.Next() | (long)random.Next() << 32;
+    public static readonly long whoami = random.Next() | (long)random.Next() << 32;
 }
 
 [Serializable]
@@ -53,14 +53,6 @@ public class PlayerInfo {
     public float skillMpHold;
 }
 
-public class EnemyBoundingBox {
-    public float width, height;
-
-    // how can this even happen.
-    public float[] x;
-    public float[] y;
-}
-
 public class EnemyInfo {
     public int frameIndex;
     public int sequenceAim;
@@ -76,8 +68,6 @@ public class EnemyInfo {
     public float hp, hpmax;
     public float mp, mpmax;
     public int aimInt;
-
-    public EnemyBoundingBox bbox;
 }
 
 /*
@@ -112,7 +102,7 @@ public class ServerBoundOtherEnemiesSyncPacket : ServerBoundPacket {
     public long[] remoteTokens;
     public override void Process() {
         SyncPatcherEnemies.enemyInfos = otherEnemies;
-        GunmuHandler.recreateGunmu(remoteTokens, otherEnemies);
+        // GunmuHandler.recreateGunmu(remoteTokens, otherEnemies);
     }
 }
 
@@ -246,5 +236,28 @@ public class ServerBoundProtectedModePacket : ServerBoundPacket {
         } catch (Exception e) {
             error($"保护模式解压失败: {e.Message}");
         }
+    }
+}
+
+public class BoundingBox {
+    public float width, height;
+    public string key;
+    public long token;
+    // how can this even happen.
+    public float mapX, mapY;
+    public float[] x;
+    public float[] y;
+}
+
+[Serializable]
+public class ClientBoundBboxPacket : ClientBoundPacket {
+    public BoundingBox[] bboxes;
+}
+
+[Serializable]
+public class ServerBoundBboxPacket : ServerBoundPacket {
+    public BoundingBox[] bboxes;
+    public override void Process() {
+        GunmuHandler.recreateGunmu(bboxes);
     }
 }

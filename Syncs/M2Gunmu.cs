@@ -1,4 +1,5 @@
 ﻿using System;
+using Kaleidoscopic.Core;
 using Kaleidoscopic.Syncs.Packets;
 using m2d;
 using nel;
@@ -14,9 +15,13 @@ public class M2Gunmu : M2Attackable {
     public void appear(Map2d _Mp) {
         _Mp.assignMover(this, true);
     }
+    public override void runPre() {
+        base.runPre();
+    }
     public void setValues(long token, string key, float mapX, float mapY, float width, float height) {
         if(this.getColliderCreator() == null)
             this.SwitchColliderCreator(new M2MvColliderCreatorAtk(this));
+        // this.getColliderCreator().fineRecreate();
         this.remoteToken = token;
         this.remoteEnemyKey = key;
         base.gameObject.isStatic = false;
@@ -30,13 +35,15 @@ public class M2Gunmu : M2Attackable {
         this.moveBy(x - this.x, y - this.y);
     }
 
-    public void doCollider(EnemyBoundingBox bbox) {
+    public void doCollider(BoundingBox bbox) {
         if (bbox == null) return;
         var myCollider = this.getColliderCreator().Cld;
+        
 
         // base.Size(bbox.width, bbox.height);
         // myCollider.offset = new Vector2(info.collider.offset.x, info.collider.offset.y);
         //
+        // this.moveTo(bbox.mapX, bbox.mapY);
         if (bbox.x == null || bbox.y == null || bbox.width == 0 || bbox.height == 0) return;
         int n = Math.Min(bbox.x.Length, bbox.y.Length);
         Vector2[] localPts = new Vector2[n];
@@ -45,6 +52,7 @@ public class M2Gunmu : M2Attackable {
             localPts[i] = new Vector2(bbox.x[i], bbox.y[i]);
         }
         myCollider.points = localPts;
+        // myCollider.SetPath(0, localPts);
     }
 
     public override RAYHIT can_hit(M2Ray Ray) {
@@ -76,7 +84,9 @@ public class M2Gunmu : M2Attackable {
         MGKIND mgkind = mg?.kind ?? MGKIND.NONE;
         bool casterIsPlayer = atk.Caster is PR;
         if (!casterIsPlayer) return 0;
-        // 3. 【联机钩子】：在这里把你打出的伤害发给主控端！
+        if (!GeneralConfigs.multiAllowPVP.Value && this.remoteEnemyKey.ToLower().Contains("noel")) {
+            return 1;
+        }
         Dispatcher.send(new ClientBoundDamagePacket {
             targetToken = this.remoteToken,
             targetKey = this.remoteEnemyKey,

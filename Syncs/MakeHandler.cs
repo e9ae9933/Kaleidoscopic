@@ -28,13 +28,13 @@ public static class MakeHandler {
     // Prefix: Process Postfix
     public static void Process(ServerBoundDmgCounterPacket p) {
         try {
-            info("process");
+            // info("process");
             suppressThis = true;
             GameObject go = new GameObject("Gunmu2_" + (++cnt));
             M2Gunmu ghost = go.AddComponent<M2Gunmu>();
             var pr = SceneGame.M2D?.PlayerNoel;
             var mp = pr?.Mp;
-            if (mp == null) return;
+            if (mp == null || mp.Gob == null || pr.destructed) return;
             ghost.appear(mp);
             ghost.moveTo(p.original.x, p.original.y);
             int dcInt = p.original.dcInt;
